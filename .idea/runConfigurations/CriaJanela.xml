@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="CriaJanela" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="LeonardoVilelaPinheiro_Atividade08.janelas.CriaJan" />
+    <module name="LeonardoVilelaPinheiro_Atividade08" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

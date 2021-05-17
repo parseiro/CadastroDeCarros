@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="LeonardoVilelaPinheiro_Atividade08:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/LeonardoVilelaPinheiro_Atividade08_jar</output-path>
+    <root id="archive" name="LeonardoVilelaPinheiro_Atividade08.jar">
+      <element id="module-output" name="LeonardoVilelaPinheiro_Atividade08" />
+    </root>
+  </artifact>
+</component>
