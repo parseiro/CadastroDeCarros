@@ -6,27 +6,24 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
-public class CriaJan {
-    private static JFrame jan1 = new JFrame("Título inicial");
+public class CreateMainWindow {
+    private static JFrame tela = new JFrame("Título inicial");
 
     private static ButtonGroup btGroup = new ButtonGroup();
     private static JRadioButton passeioButton;
     private static JRadioButton cargaButton;
     private static CarType selectedCarType;
 
-    static {
-        passeioButton = new JRadioButton("Passeio", true);
-        cargaButton = new JRadioButton("Carga", false);
-        selectedCarType =  CarType.PASSEIO;
-        passeioButton.addActionListener(e -> selectedCarType = CarType.PASSEIO);
-        cargaButton.addActionListener(e -> selectedCarType = CarType.CARGA);
-
-        btGroup.add(passeioButton);
-        btGroup.add(cargaButton);
-    }
-
     enum CarType {
         PASSEIO, CARGA;
+    }
+
+    private static void updateLabels(CarType a) {
+        selectedCarType = a;
+
+        lbCadastrar.setText("Cadastrar " + a.name());
+        lbConsultar.setText("Consultar / excluir por placa " + a.name());
+        lbImprimir.setText("Imprimir / excluir todos " + a.name());
     }
 
     private static JButton btCadastrar = new JButton("C");
@@ -43,19 +40,29 @@ public class CriaJan {
 //    private static JMenu menuPrincipal = new JMenu("Principal");
 //    private static JMenuBar barraMenu = new JMenuBar();
 
+    static {
+        passeioButton = new JRadioButton("Passeio", true);
+        cargaButton = new JRadioButton("Carga", false);
+        passeioButton.addActionListener(e -> updateLabels(CarType.PASSEIO));
+        cargaButton.addActionListener(e -> updateLabels(CarType.CARGA));
+        updateLabels(CarType.PASSEIO); // set the default labels
+
+        btGroup.add(passeioButton);
+        btGroup.add(cargaButton);
+    }
+
     public static void main(String... args) {
         EventQueue.invokeLater(() -> {
             coisar();
         });
-
     }
 
     public static void coisar() {
 
-        jan1.setSize(1000, 1000);
-        jan1.setTitle("Sistema de janelas");
+        tela.setSize(1000, 1000);
+        tela.setTitle("Sistema de janelas");
 
-        jan1.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        tela.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
 //        cxCod.setColumns(10);
@@ -65,8 +72,8 @@ public class CriaJan {
 
 
         btSair.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "É o botão SAIR", "Item de Menu", JOptionPane.WARNING_MESSAGE);
-            jan1.dispose();
+            JOptionPane.showMessageDialog(null, "Obrigado por usar o nosso sistema", "Saindo", JOptionPane.INFORMATION_MESSAGE);
+            tela.dispose();
         });
 
 /*        itMenuSair.addActionListener(e -> {
@@ -108,49 +115,41 @@ public class CriaJan {
 //        jan1.setJMenuBar(barraMenu);
 
         var layout = new GridBagLayout();
-//        jan1.setLayout(new FlowLayout());
-        jan1.setLayout(layout);
+        tela.setLayout(layout);
 
         int line = 0;
 
-        jan1.add(passeioButton, new GBC(0, line, 2, 1));
+        tela.add(passeioButton, new GBC(0, line, 2, 1));
         line++;
 
-        jan1.add(cargaButton, new GBC(0, line, 2, 1));
+        tela.add(cargaButton, new GBC(0, line, 2, 1));
         line++;
 
-        jan1.add(btCadastrar, new GBC(0, line).setAnchor(GridBagConstraints.CENTER));
-        jan1.add(lbCadastrar, new GBC(1, line));
+        tela.add(btCadastrar, new GBC(0, line).setAnchor(GridBagConstraints.CENTER));
+        tela.add(lbCadastrar, new GBC(1, line));
         line++;
 
-        jan1.add(btConsultar, new GBC(0, line).setAnchor(GridBagConstraints.CENTER));
-        jan1.add(lbConsultar, new GBC(1, line));
+        tela.add(btConsultar, new GBC(0, line).setAnchor(GridBagConstraints.CENTER));
+        tela.add(lbConsultar, new GBC(1, line));
         line++;
 
-        jan1.add(btImprimir, new GBC(0, line).setAnchor(GridBagConstraints.CENTER));
-        jan1.add(lbImprimir, new GBC(1, line));
-        line++;
-
-
-        jan1.add(btSair, new GBC(0, line).setAnchor(GridBagConstraints.CENTER));
-        jan1.add(new JLabel("Sair"), new GBC(1, line));
+        tela.add(btImprimir, new GBC(0, line).setAnchor(GridBagConstraints.CENTER));
+        tela.add(lbImprimir, new GBC(1, line));
         line++;
 
 
-//        jan1.add(new NotHelloWorldComponent());
+        tela.add(btSair, new GBC(0, line).setAnchor(GridBagConstraints.CENTER));
+        tela.add(new JLabel("Sair"), new GBC(1, line));
+        line++;
+
+
+
 //        jan1.pack();
 
-//        jan1.add(new DrawComponent());
-
-//        jan1.add(new TextComponentPanel());
-        jan1.pack();
-
-        jan1.setVisible(true);
+        tela.setVisible(true);
     }
 
-    static private void updateLabels(String a) {
 
-    }
 
 }
 
