@@ -11,6 +11,9 @@ public class BDVeiculos {
     static public BDVeiculos getBDVeiculos() {
         if (instance == null) {
             instance = new BDVeiculos();
+
+            instance.BDPas.add(new Passeio("AZZ-0J58", "Toyota", "Etios", "prata", 4, 100, new Motor(), 5));
+            instance.BDPas.add(new Passeio("BLABLABLA", "Volkswagen", "Gol", "azul", 4, 100, new Motor(), 5));
         }
         return instance;
     }

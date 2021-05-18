@@ -1,8 +1,11 @@
 package LeonardoVilelaPinheiro_Atividade08.janelas;
 
 import LeonardoVilelaPinheiro_Atividade08.BDVeiculos;
+import LeonardoVilelaPinheiro_Atividade08.Passeio;
+import LeonardoVilelaPinheiro_Atividade08.Veiculo;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.print.PrinterException;
 
@@ -30,7 +33,16 @@ public class ListPasseio {
         });
 
         btExcluirTodos.addActionListener(e -> {
-            BDVeiculos.getBDPas().clear();
+            int y = JOptionPane.showConfirmDialog(null, "Limpar tabela?", "Confirmação", JOptionPane.YES_NO_CANCEL_OPTION);
+            switch (y) {
+                case 0:
+                    BDVeiculos.getBDPas().clear();
+                    tela.dispose();
+                    break;
+                case 1:
+                case 2:
+                    break;
+            }
         });
     }
 
@@ -58,7 +70,13 @@ public class ListPasseio {
 
         String[] columnNames = {"Planet", "Radius", "Moons", "Gaseous"};
 
-        table = new JTable(cells, columnNames);
+        if (true) {
+            var beanModel = new BeanTableModel<Passeio>(Passeio.class, Veiculo.class, BDVeiculos.getBDPas());
+            table = new JTable(beanModel);
+        } else {
+            table = new JTable(cells, columnNames);
+        }
+
         table.setAutoCreateRowSorter(true);
         tela.add(new JScrollPane(table), BorderLayout.CENTER);
 

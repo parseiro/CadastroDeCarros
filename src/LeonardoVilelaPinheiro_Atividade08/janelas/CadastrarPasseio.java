@@ -1,5 +1,9 @@
 package LeonardoVilelaPinheiro_Atividade08.janelas;
 
+import LeonardoVilelaPinheiro_Atividade08.BDVeiculos;
+import LeonardoVilelaPinheiro_Atividade08.Passeio;
+import LeonardoVilelaPinheiro_Atividade08.VelocException;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -52,10 +56,6 @@ public class CadastrarPasseio {
 
         int line = 0;
 
-        tela.add(new JLabel("Qtde passageiros:"), new GBC(0, line));
-        tela.add(txtQdePassageiros, new GBC(1, line, 3, 1));
-        line++;
-
         tela.add(new JLabel("Placa:"), new GBC(0, line));
         tela.add(txtPlaca, new GBC(1, line, 3, 1));
         line++;
@@ -88,6 +88,10 @@ public class CadastrarPasseio {
         tela.add(txtPotencia, new GBC(1, line, 3, 1));
         line++;
 
+        tela.add(new JLabel("Qtde passageiros:"), new GBC(0, line));
+        tela.add(txtQdePassageiros, new GBC(1, line, 3, 1));
+        line++;
+
         tela.add(btCadastrar, new GBC(0, line).setAnchor(GridBagConstraints.CENTER));
         tela.add(btLimpar, new GBC(1, line).setAnchor(GridBagConstraints.CENTER));
         tela.add(btNovo, new GBC(2, line).setAnchor(GridBagConstraints.CENTER));
@@ -95,8 +99,46 @@ public class CadastrarPasseio {
 //        line++;
 
 
-//        jan1.pack();
-
+        tela.pack();
         tela.setVisible(true);
+
+        btCadastrar.addActionListener(e -> {
+            if (salvar())
+                tela.dispose();
+        });
+    }
+
+    private boolean salvar() {
+        var novoPasseio = new Passeio();
+
+        try {
+            String placa = txtPlaca.getText();
+            novoPasseio.setPlaca(placa);
+
+            String marca = txtMarca.getText();
+            novoPasseio.setMarca(marca);
+
+            String modelo = txtModelo.getText();
+            novoPasseio.setModelo(modelo);
+
+            String cor = txtCor.getText();
+            novoPasseio.setCor(cor);
+
+            int qtdRodas = Integer.parseInt(txtQdeRodas.getText());
+            novoPasseio.setQtdRodas(qtdRodas);
+
+            novoPasseio.setVelocMax(Float.parseFloat(txtVelocidade.getText()));
+
+            novoPasseio.setPistoes(Integer.parseInt(txtQdePistoes.getText()));
+            novoPasseio.setPotencia(Integer.parseInt(txtPotencia.getText()));
+            novoPasseio.setQtdePassageiros(Integer.parseInt(txtQdePassageiros.getText()));
+
+            BDVeiculos.getBDPas().add(novoPasseio);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 }

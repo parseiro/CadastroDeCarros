@@ -23,6 +23,11 @@ public final class Passeio
         this.qtdePassageiros = qtdePassageiros;
     }
 
+    public Passeio(String placa, String marca, String modelo, String cor, int qtdRodas, float velocMax, Motor motor, int qtdePassageiros) {
+        super(placa, marca, modelo, cor, qtdRodas, velocMax, motor);
+        this.qtdePassageiros = qtdePassageiros;
+    }
+
     public int getQtdePassageiros() {
         return qtdePassageiros;
     }

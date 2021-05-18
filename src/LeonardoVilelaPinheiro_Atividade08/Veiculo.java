@@ -89,6 +89,16 @@ public abstract class Veiculo {
         this.motor = new Motor();
     }
 
+    Veiculo(String placa, String marca, String modelo, String cor, int qtdRodas, float velocMax, Motor motor) {
+        this.placa = placa;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.cor = cor;
+        this.qtdRodas = qtdRodas;
+        this.velocMax = velocMax;
+        this.motor = motor;
+    }
+
     public void setPistoes(int pistoes) {
         if (this.motor != null) {
             this.motor.setQtdPist(pistoes);

@@ -16,6 +16,12 @@ public final class Carga
         this.cargaMax = cargaMax;
     }
 
+    public Carga(String placa, String marca, String modelo, String cor, int qtdRodas, float velocMax, Motor motor, int tara, int cargaMax) {
+        super(placa, marca, modelo, cor, qtdRodas, velocMax, motor);
+        this.tara = tara;
+        this.cargaMax = cargaMax;
+    }
+
     public int getTara() {
         return tara;
     }
