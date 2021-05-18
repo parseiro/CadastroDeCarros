@@ -4,28 +4,41 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CadastrarPasseio {
-    private static JFrame tela = new JFrame("Cadastrar passeio");
+    private static CadastrarPasseio instance;
 
-    private static JButton btCadastrar = new JButton("Salvar");
-    private static JButton btLimpar = new JButton("Limpar");
-    private static JButton btNovo = new JButton("Novo");
-    private static JButton btSair = new JButton("Sair");
+    private JFrame tela = new JFrame("Cadastrar passeio");
 
-    private static JTextField txtQdePassageiros = new JTextField(10);
-    private static JTextField txtPlaca = new JTextField(10);
-    private static JTextField txtMarca = new JTextField(10);
-    private static JTextField txtModelo = new JTextField(10);
-    private static JTextField txtCor = new JTextField(10);
-    private static JTextField txtQdeRodas = new JTextField(10);
-    private static JTextField txtVelocidade = new JTextField(10);
-    private static JTextField txtQdePistoes = new JTextField(10);
-    private static JTextField txtPotencia = new JTextField(10);
+    private JButton btCadastrar = new JButton("Salvar");
+    private JButton btLimpar = new JButton("Limpar");
+    private JButton btNovo = new JButton("Novo");
+    private JButton btSair = new JButton("Sair");
+
+    private JTextField txtQdePassageiros = new JTextField(10);
+    private JTextField txtPlaca = new JTextField(10);
+    private JTextField txtMarca = new JTextField(10);
+    private JTextField txtModelo = new JTextField(10);
+    private JTextField txtCor = new JTextField(10);
+    private JTextField txtQdeRodas = new JTextField(10);
+    private JTextField txtVelocidade = new JTextField(10);
+    private JTextField txtQdePistoes = new JTextField(10);
+    private JTextField txtPotencia = new JTextField(10);
 
     public static void main(String... args) {
         EventQueue.invokeLater(CadastrarPasseio::coisar);
     }
 
     private static void coisar() {
+    }
+
+    public static JFrame getJFrame() {
+        if (instance == null) {
+            instance = new CadastrarPasseio();
+        }
+
+        return instance.tela;
+    }
+
+    private CadastrarPasseio() {
         tela.setSize(1000, 1000);
         tela.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,13 +92,11 @@ public class CadastrarPasseio {
         tela.add(btLimpar, new GBC(1, line).setAnchor(GridBagConstraints.CENTER));
         tela.add(btNovo, new GBC(2, line).setAnchor(GridBagConstraints.CENTER));
         tela.add(btSair, new GBC(3, line).setAnchor(GridBagConstraints.CENTER));
-        line++;
-
+//        line++;
 
 
 //        jan1.pack();
 
         tela.setVisible(true);
-
     }
 }

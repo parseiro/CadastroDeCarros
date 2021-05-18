@@ -10,8 +10,8 @@ public class CreateMainWindow {
     private static JFrame tela = new JFrame("Título inicial");
 
     private static ButtonGroup btGroup = new ButtonGroup();
-    private static JRadioButton passeioButton;
-    private static JRadioButton cargaButton;
+    private static JRadioButton passeioButton = new JRadioButton("Passeio", true);
+    private static JRadioButton cargaButton = new JRadioButton("Carga", false);
     private static CarType selectedCarType;
 
     enum CarType {
@@ -41,20 +41,33 @@ public class CreateMainWindow {
 //    private static JMenuBar barraMenu = new JMenuBar();
 
     static {
-        passeioButton = new JRadioButton("Passeio", true);
-        cargaButton = new JRadioButton("Carga", false);
         passeioButton.addActionListener(e -> updateLabels(CarType.PASSEIO));
         cargaButton.addActionListener(e -> updateLabels(CarType.CARGA));
         updateLabels(CarType.PASSEIO); // set the default labels
 
         btGroup.add(passeioButton);
         btGroup.add(cargaButton);
+
+        btCadastrar.addActionListener(e -> {
+            if (CreateMainWindow.selectedCarType == CarType.CARGA) {
+
+            } else {
+                CadastrarPasseio.getJFrame().setVisible(true);
+            }
+        });
+
+        btImprimir.addActionListener(e -> {
+            if (CreateMainWindow.selectedCarType == CarType.CARGA) {
+
+            } else {
+                System.out.println("Ativando");
+                ListPasseio.getFrame().setVisible(true);
+            }
+        });
     }
 
     public static void main(String... args) {
-        EventQueue.invokeLater(() -> {
-            coisar();
-        });
+        EventQueue.invokeLater(CreateMainWindow::coisar);
     }
 
     public static void coisar() {
@@ -68,7 +81,6 @@ public class CreateMainWindow {
 //        cxCod.setColumns(10);
 
 //        jan1.add(cxCod);
-
 
 
         btSair.addActionListener(e -> {
@@ -137,18 +149,15 @@ public class CreateMainWindow {
         tela.add(lbImprimir, new GBC(1, line));
         line++;
 
-
         tela.add(btSair, new GBC(0, line).setAnchor(GridBagConstraints.CENTER));
         tela.add(new JLabel("Sair"), new GBC(1, line));
         line++;
 
 
-
-//        jan1.pack();
+        tela.pack();
 
         tela.setVisible(true);
     }
-
 
 
 }

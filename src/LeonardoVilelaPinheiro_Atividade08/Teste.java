@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Teste {
 
-    public static BDVeiculos bancoDeVeiculos = new BDVeiculos();
+    public static BDVeiculos bancoDeVeiculos = BDVeiculos.getBDVeiculos();
 
     private static String bemvindo =
             "Sistema de Gestão de Veículos - Menu Inicial%n" +

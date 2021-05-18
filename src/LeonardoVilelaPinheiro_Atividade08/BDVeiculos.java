@@ -3,15 +3,28 @@ package LeonardoVilelaPinheiro_Atividade08;
 import java.util.*;
 
 public class BDVeiculos {
+    private static BDVeiculos instance;
+
     private final List<Carga> BDCarg = new ArrayList<>();
     private final List<Passeio> BDPas = new ArrayList<>();
 
-    public List<Passeio> getBDPas() {
-        return BDPas;
+    static public BDVeiculos getBDVeiculos() {
+        if (instance == null) {
+            instance = new BDVeiculos();
+        }
+        return instance;
     }
 
-    public List<Carga> getBDCarg() {
-        return BDCarg;
+    private BDVeiculos() {
+
+    }
+
+    static public List<Passeio> getBDPas() {
+        return getBDVeiculos().BDPas;
+    }
+
+    static public List<Carga> getBDCarg() {
+        return getBDVeiculos().BDCarg;
     }
 
     public void cadastrarPasseio() throws VeicExistException, MaxVeiculosExceptions {
