@@ -16,7 +16,7 @@ public final class Passeio
     }
 
     public Passeio() {
-        this.qtdePassageiros = 0;
+//        this.qtdePassageiros = 0; // desnecessário
     }
 
     public Passeio(int qtdePassageiros) {

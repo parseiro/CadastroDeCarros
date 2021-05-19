@@ -50,17 +50,24 @@ public class CreateMainWindow {
 
         btCadastrar.addActionListener(e -> {
             if (CreateMainWindow.selectedCarType == CarType.CARGA) {
-
+                CadastrarCarga.getJFrame().setVisible(true);
             } else {
                 CadastrarPasseio.getJFrame().setVisible(true);
             }
         });
 
+        btConsultar.addActionListener(e -> {
+            if (CreateMainWindow.selectedCarType == CarType.CARGA) {
+                ConsultarCarga.getJFrame().setVisible(true);
+            } else {
+                ConsultarPasseio.getJFrame().setVisible(true);
+            }
+        });
+
         btImprimir.addActionListener(e -> {
             if (CreateMainWindow.selectedCarType == CarType.CARGA) {
-
+                ListCarga.getFrame().setVisible(true);
             } else {
-                System.out.println("Ativando");
                 ListPasseio.getFrame().setVisible(true);
             }
         });
@@ -68,7 +75,14 @@ public class CreateMainWindow {
 
     public static void main(String... args) {
         EventQueue.invokeLater(CreateMainWindow::coisar);
+
+//        teste(null);
     }
+
+/*    static private void teste(@NonNull String argumento) {
+        if (argumento.equalsIgnoreCase("oi")) System.out.println("É um \"oi\"");
+        else System.out.println("Que nada...");
+    }*/
 
     public static void coisar() {
 

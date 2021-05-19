@@ -17,7 +17,6 @@ public class CadastrarPasseio {
     private JButton btNovo = new JButton("Novo");
     private JButton btSair = new JButton("Sair");
 
-    private JTextField txtQdePassageiros = new JTextField(10);
     private JTextField txtPlaca = new JTextField(10);
     private JTextField txtMarca = new JTextField(10);
     private JTextField txtModelo = new JTextField(10);
@@ -27,11 +26,26 @@ public class CadastrarPasseio {
     private JTextField txtQdePistoes = new JTextField(10);
     private JTextField txtPotencia = new JTextField(10);
 
-    public static void main(String... args) {
-        EventQueue.invokeLater(CadastrarPasseio::coisar);
-    }
+    private JTextField txtQdePassageiros = new JTextField(10);
 
-    private static void coisar() {
+    private JLabel lbErro = new JLabel("");
+
+    {
+        btSair.addActionListener(e -> {
+            tela_editavel(false);
+            limpa_campos();
+            tela.dispose();
+        });
+
+        btNovo.addActionListener(e -> {
+            tela_editavel(true);
+            limpa_campos();
+        });
+
+        btLimpar.addActionListener(e -> {
+            tela_editavel(true);
+            limpa_campos();
+        });
     }
 
     public static JFrame getJFrame() {
@@ -43,18 +57,19 @@ public class CadastrarPasseio {
     }
 
     private CadastrarPasseio() {
+        tela_editavel(false);
+
         tela.setSize(1000, 1000);
         tela.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        btSair.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "Obrigado por usar o nosso sistema", "Saindo", JOptionPane.INFORMATION_MESSAGE);
-            tela.dispose();
-        });
 
         var layout = new GridBagLayout();
         tela.setLayout(layout);
 
         int line = 0;
+
+        tela.add(new JLabel("Qtde passageiros:"), new GBC(0, line));
+        tela.add(txtQdePassageiros, new GBC(1, line, 3, 1));
+        line++;
 
         tela.add(new JLabel("Placa:"), new GBC(0, line));
         tela.add(txtPlaca, new GBC(1, line, 3, 1));
@@ -88,8 +103,8 @@ public class CadastrarPasseio {
         tela.add(txtPotencia, new GBC(1, line, 3, 1));
         line++;
 
-        tela.add(new JLabel("Qtde passageiros:"), new GBC(0, line));
-        tela.add(txtQdePassageiros, new GBC(1, line, 3, 1));
+        tela.add(new JLabel("Erro (se presente):"), new GBC(0, line));
+        tela.add(lbErro, new GBC(1, line, 3, 1));
         line++;
 
         tela.add(btCadastrar, new GBC(0, line).setAnchor(GridBagConstraints.CENTER));
@@ -103,8 +118,10 @@ public class CadastrarPasseio {
         tela.setVisible(true);
 
         btCadastrar.addActionListener(e -> {
-            if (salvar())
+            if (salvar()) {
+                //tela_editavel(true);
                 tela.dispose();
+            }
         });
     }
 
@@ -127,18 +144,58 @@ public class CadastrarPasseio {
             int qtdRodas = Integer.parseInt(txtQdeRodas.getText());
             novoPasseio.setQtdRodas(qtdRodas);
 
-            novoPasseio.setVelocMax(Float.parseFloat(txtVelocidade.getText()));
+            try {
+                novoPasseio.setVelocMax(Float.parseFloat(txtVelocidade.getText()));
+            } catch (VelocException e) {
+
+            }
 
             novoPasseio.setPistoes(Integer.parseInt(txtQdePistoes.getText()));
             novoPasseio.setPotencia(Integer.parseInt(txtPotencia.getText()));
             novoPasseio.setQtdePassageiros(Integer.parseInt(txtQdePassageiros.getText()));
 
-            BDVeiculos.getBDPas().add(novoPasseio);
+            BDVeiculos.getBDPasseio().add(novoPasseio);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            this.lbErro.setText("Verifique os dados");
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
 
         return true;
+    }
+
+    private void tela_editavel(boolean enabled) {
+        txtPlaca.setEditable(enabled);
+        txtMarca.setEditable(enabled);
+        txtModelo.setEditable(enabled);
+        txtCor.setEditable(enabled);
+        txtQdeRodas.setEditable(enabled);
+        txtVelocidade.setEditable(enabled);
+        txtQdePistoes.setEditable(enabled);
+        txtPotencia.setEditable(enabled);
+
+        // campo que muda entre Passeio e Carga
+        txtQdePassageiros.setEditable(enabled);
+
+        btLimpar.setEnabled(enabled);
+        btCadastrar.setEnabled(enabled);
+        btNovo.setEnabled(!enabled);
+    }
+
+    void limpa_campos() {
+        txtPlaca.setText("");
+        txtMarca.setText("");
+        txtModelo.setText("");
+        txtCor.setText("");
+        txtQdeRodas.setText("");
+        txtVelocidade.setText("");
+        txtQdePistoes.setText("");
+        txtPotencia.setText("");
+
+        // campo que muda entre Passeio e Carga
+        txtQdePassageiros.setText("");
     }
 }

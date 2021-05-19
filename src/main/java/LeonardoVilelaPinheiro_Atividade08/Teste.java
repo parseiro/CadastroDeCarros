@@ -22,8 +22,8 @@ public class Teste {
     public static void main(String[] args)
             throws IOException, InterruptedException {
 
-        final List<Passeio> veiculosPasseio = bancoDeVeiculos.getBDPas();
-        final List<Carga> veiculosCarga = bancoDeVeiculos.getBDCarg();
+        final List<Passeio> veiculosPasseio = bancoDeVeiculos.getBDPasseio();
+        final List<Carga> veiculosCarga = bancoDeVeiculos.getBDCarga();
 
         String command;
 

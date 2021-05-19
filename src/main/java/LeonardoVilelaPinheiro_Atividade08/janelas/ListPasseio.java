@@ -5,18 +5,17 @@ import LeonardoVilelaPinheiro_Atividade08.Passeio;
 import LeonardoVilelaPinheiro_Atividade08.Veiculo;
 
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.print.PrinterException;
 
 public class ListPasseio {
     private static ListPasseio instance;
 
-    public JFrame tela = new JFrame("Imprimir / Excluir todos");
+    public JFrame tela = new JFrame("Imprimir / Excluir todosm PASSEIO");
     private JTable table;
     public static BDVeiculos bancoDeVeiculos = BDVeiculos.getBDVeiculos();
 
-    private static JButton btImprimirTodos = new JButton("Imprimir Todos");
+    private JButton btImprimirTodos = new JButton("Imprimir na Impressora");
     private static JButton btExcluirTodos = new JButton("Excluir Todos");
     private static JButton btSair = new JButton("Sair");
 
@@ -26,8 +25,9 @@ public class ListPasseio {
         });
 
         btImprimirTodos.addActionListener(e -> {
-            try { table.print(); }
-            catch (SecurityException | PrinterException ex) {
+            try {
+                table.print();
+            } catch (SecurityException | PrinterException ex) {
                 ex.printStackTrace();
             }
         });
@@ -36,7 +36,7 @@ public class ListPasseio {
             int y = JOptionPane.showConfirmDialog(null, "Limpar tabela?", "Confirmação", JOptionPane.YES_NO_CANCEL_OPTION);
             switch (y) {
                 case 0:
-                    BDVeiculos.getBDPas().clear();
+                    BDVeiculos.getBDPasseio().clear();
                     tela.dispose();
                     break;
                 case 1:
@@ -47,35 +47,19 @@ public class ListPasseio {
     }
 
     public static JFrame getFrame() {
-        if (instance == null) {
-            instance = new ListPasseio();
-        }
+        // sempre cria nova tela a fim de atualizar a tabela
+//        if (instance == null) {
+        instance = new ListPasseio();
+//        }
 
         return instance.tela;
     }
 
+
     private ListPasseio() {
-        Object[][] cells =
-                {
-                        {"Mercury", 2440.0, 0, false, Color.YELLOW},
-                        {"Venus", 6052.0, 0, false, Color.YELLOW},
-                        {"Earth", 6378.0, 1, false, Color.BLUE},
-                        {"Mars", 3397.0, 2, false, Color.RED},
-                        {"Jupiter", 71492.0, 16, true, Color.ORANGE},
-                        {"Saturn", 60268.0, 18, true, Color.ORANGE},
-                        {"Uranus", 25559.0, 17, true, Color.BLUE},
-                        {"Neptune", 24766.0, 8, true, Color.BLUE},
-                        {"Pluto", 1137.0, 1, false, Color.BLACK}
-                };
+        var beanModel = new BeanTableModel<Passeio>(Passeio.class, Veiculo.class, BDVeiculos.getBDPasseio());
+        table = new JTable(beanModel);
 
-        String[] columnNames = {"Planet", "Radius", "Moons", "Gaseous"};
-
-        if (true) {
-            var beanModel = new BeanTableModel<Passeio>(Passeio.class, Veiculo.class, BDVeiculos.getBDPas());
-            table = new JTable(beanModel);
-        } else {
-            table = new JTable(cells, columnNames);
-        }
 
         table.setAutoCreateRowSorter(true);
         tela.add(new JScrollPane(table), BorderLayout.CENTER);

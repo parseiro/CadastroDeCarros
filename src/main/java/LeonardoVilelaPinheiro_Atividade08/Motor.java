@@ -9,6 +9,11 @@ public class Motor {
         this.potencia = 0;
     }
 
+    public Motor(int qtdPist, int potencia) {
+        this.qtdPist = qtdPist;
+        this.potencia = potencia;
+    }
+
     public int getQtdPist() {
         return qtdPist;
     }

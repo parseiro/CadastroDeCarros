@@ -1,21 +1,29 @@
 package LeonardoVilelaPinheiro_Atividade08;
 
+import lombok.NonNull;
+
 import java.util.Objects;
 
 public abstract class Veiculo {
-    private String placa;
-    private String marca;
-    private String modelo;
-    private String cor;
+    @NonNull private String placa;
+    @NonNull private String marca;
+    @NonNull private String modelo;
+    @NonNull private String cor;
     private int qtdRodas;
     private float velocMax; // velocidade em km/h
-    private Motor motor;
+    @NonNull private Motor motor;
 
     public String getPlaca() {
         return placa;
     }
 
     public final void setPlaca(String placa) {
+
+        if (placa == null || placa.isBlank()) {
+            throw new IllegalArgumentException();
+        }
+        else placa = placa.strip();
+
         this.placa = placa.toUpperCase();
     }
 
@@ -24,6 +32,11 @@ public abstract class Veiculo {
     }
 
     public final void setMarca(String marca) {
+        if (marca == null || marca.isBlank()) {
+            throw new IllegalArgumentException();
+        }
+        else marca = marca.strip();
+
         this.marca = marca;
     }
 
@@ -32,6 +45,11 @@ public abstract class Veiculo {
     }
 
     public final void setModelo(String modelo) {
+        if (modelo == null || modelo.isBlank()) {
+            throw new IllegalArgumentException();
+        }
+        else modelo = modelo.strip();
+
         this.modelo = modelo;
     }
 
@@ -55,11 +73,14 @@ public abstract class Veiculo {
 
     abstract float calcVel(float velocMax);
 
-    public String getCor() {
-        return cor;
-    }
+    public String getCor() { return cor; }
 
     public final void setCor(String cor) {
+        if (cor == null || cor.isBlank()) {
+            throw new IllegalArgumentException();
+        }
+        else cor = cor.strip();
+
         this.cor = cor;
     }
 
@@ -83,20 +104,26 @@ public abstract class Veiculo {
         this.placa = " ";
         this.marca = " ";
         this.modelo = " ";
-        this.velocMax = 0;
+//        this.velocMax = 0; // desnecessário
         this.cor = " ";
-        this.qtdRodas = 0;
+//        this.qtdRodas = 0; // desnecessário
         this.motor = new Motor();
     }
 
     Veiculo(String placa, String marca, String modelo, String cor, int qtdRodas, float velocMax, Motor motor) {
-        this.placa = placa;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.cor = cor;
-        this.qtdRodas = qtdRodas;
-        this.velocMax = velocMax;
-        this.motor = motor;
+        super();
+
+        this.setPlaca(placa);
+        this.setMarca(marca);
+        this.setModelo(modelo);
+        this.setCor(cor);
+        this.setQtdRodas(qtdRodas);
+        try {
+            this.setVelocMax(velocMax);
+        } catch (VelocException e) {
+
+        }
+        this.setMotor(motor);
     }
 
     public void setPistoes(int pistoes) {

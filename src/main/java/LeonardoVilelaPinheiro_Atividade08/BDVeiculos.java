@@ -3,6 +3,8 @@ package LeonardoVilelaPinheiro_Atividade08;
 import java.util.*;
 
 public class BDVeiculos {
+    public static boolean TEST_MODE = true;
+
     private static BDVeiculos instance;
 
     private final List<Carga> BDCarg = new ArrayList<>();
@@ -12,8 +14,13 @@ public class BDVeiculos {
         if (instance == null) {
             instance = new BDVeiculos();
 
-            instance.BDPas.add(new Passeio("AZZ-0J58", "Toyota", "Etios", "prata", 4, 100, new Motor(), 5));
-            instance.BDPas.add(new Passeio("BLABLABLA", "Volkswagen", "Gol", "azul", 4, 100, new Motor(), 5));
+            if (TEST_MODE) {
+                instance.BDPas.add(new Passeio("ABC-0A12", "Toyota", "Etios", "prata", 4, 100, new Motor(8, 140), 5));
+                instance.BDPas.add(new Passeio("BLABLABLA", "Volkswagen", "Gol", "azul", 4, 100, new Motor(12, 180), 5));
+
+                instance.BDCarg.add(new Carga("CARG-PESAD", "Volvo", "Caminhão LX", "preto", 22, 100, new Motor(100, 2500), 500, 4000));
+                instance.BDCarg.add(new Carga("PESO-PESADO", "Volkswagen", "Carreta X", "branco", 36, 100, new Motor(112, 4700), 600, 7000));
+            }
         }
         return instance;
     }
@@ -22,11 +29,11 @@ public class BDVeiculos {
 
     }
 
-    static public List<Passeio> getBDPas() {
+    static public List<Passeio> getBDPasseio() {
         return getBDVeiculos().BDPas;
     }
 
-    static public List<Carga> getBDCarg() {
+    static public List<Carga> getBDCarga() {
         return getBDVeiculos().BDCarg;
     }
 
