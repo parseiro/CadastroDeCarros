@@ -6,7 +6,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
-public class CreateMainWindow {
+public class AquiComeceAqui {
     private static JFrame tela = new JFrame("Título inicial");
 
     private static ButtonGroup btGroup = new ButtonGroup();
@@ -49,7 +49,7 @@ public class CreateMainWindow {
         btGroup.add(cargaButton);
 
         btCadastrar.addActionListener(e -> {
-            if (CreateMainWindow.selectedCarType == CarType.CARGA) {
+            if (AquiComeceAqui.selectedCarType == CarType.CARGA) {
                 CadastrarCarga.getJFrame().setVisible(true);
             } else {
                 CadastrarPasseio.getJFrame().setVisible(true);
@@ -57,7 +57,7 @@ public class CreateMainWindow {
         });
 
         btConsultar.addActionListener(e -> {
-            if (CreateMainWindow.selectedCarType == CarType.CARGA) {
+            if (AquiComeceAqui.selectedCarType == CarType.CARGA) {
                 ConsultarCarga.getJFrame().setVisible(true);
             } else {
                 ConsultarPasseio.getJFrame().setVisible(true);
@@ -65,7 +65,7 @@ public class CreateMainWindow {
         });
 
         btImprimir.addActionListener(e -> {
-            if (CreateMainWindow.selectedCarType == CarType.CARGA) {
+            if (AquiComeceAqui.selectedCarType == CarType.CARGA) {
                 ListCarga.getFrame().setVisible(true);
             } else {
                 ListPasseio.getFrame().setVisible(true);
@@ -74,7 +74,7 @@ public class CreateMainWindow {
     }
 
     public static void main(String... args) {
-        EventQueue.invokeLater(CreateMainWindow::coisar);
+        EventQueue.invokeLater(AquiComeceAqui::coisar);
 
 //        teste(null);
     }

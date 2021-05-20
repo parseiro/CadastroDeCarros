@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: LeonardoVilelaPinheiro_Atividade08.janelas.CreateMainWindow
+Main-Class: LeonardoVilelaPinheiro_Atividade08.janelas.AquiComeceAqui
 
