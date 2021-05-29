@@ -10,7 +10,7 @@ public class BDVeiculos {
     private final List<Carga> BDCarg = new ArrayList<>();
     private final List<Passeio> BDPas = new ArrayList<>();
 
-    static public BDVeiculos getBDVeiculos() {
+    static public synchronized BDVeiculos getBDVeiculos() {
         if (instance == null) {
             instance = new BDVeiculos();
 

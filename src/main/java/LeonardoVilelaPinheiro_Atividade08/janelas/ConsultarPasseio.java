@@ -45,9 +45,7 @@ public class ConsultarPasseio {
         tela.setSize(1000, 1000);
         tela.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        btSair.addActionListener(e -> {
-            tela.dispose();
-        });
+        btSair.addActionListener(e -> tela.dispose());
 
         var layout = new GridBagLayout();
         tela.setLayout(layout);
@@ -68,7 +66,7 @@ public class ConsultarPasseio {
 
         tela.add(new JLabel("Cor:"), new GBC(0, line));
         tela.add(txtCor, new GBC(1, line, 3, 1));
-              line++;
+        line++;
 
         tela.add(new JLabel("Qtd rodas:"), new GBC(0, line));
         tela.add(txtQdeRodas, new GBC(1, line, 3, 1));
@@ -99,23 +97,19 @@ public class ConsultarPasseio {
         tela.pack();
         tela.setVisible(true);
 
-        btConsultar.addActionListener(e -> {
-            consultar();
-        });
+        btConsultar.addActionListener(e -> consultar());
 
         btExcluir.addActionListener(e -> {
 
             int y = JOptionPane.showConfirmDialog(null, "Deseja realmente apagar o veículo?", "Confirmação", JOptionPane.YES_NO_OPTION);
-            switch (y) {
-                case 0:
-                    var veiculo = this.veiculoAtivo;
+            if (y == 0) {
+                var veiculo = this.veiculoAtivo;
 
-                    if (BDVeiculos.getBDPasseio().contains(veiculo)) {
-                        BDVeiculos.getBDPasseio().remove(veiculo);
-                        tela.dispose();
-                    }
+                if (BDVeiculos.getBDPasseio().contains(veiculo)) {
+                    BDVeiculos.getBDPasseio().remove(veiculo);
                     tela.dispose();
-                    break;
+                }
+                tela.dispose();
             }
 
         });
@@ -125,7 +119,7 @@ public class ConsultarPasseio {
 
     private boolean consultar() {
         final String placa = txtPlaca.getText();
-        Optional<Passeio> veicOpt = BDVeiculos.getBDPasseio().stream().filter(s -> s.getPlaca().equals(placa)).findAny();
+        Optional<Passeio> veicOpt = BDVeiculos.getBDPasseio().stream().filter(s -> s.getPlaca().equalsIgnoreCase(placa)).findAny();
 
         btExcluir.setEnabled(true);
 

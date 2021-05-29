@@ -3,7 +3,7 @@ package LeonardoVilelaPinheiro_Atividade08;
 import java.io.IOException;
 import java.util.List;
 
-public class Teste {
+public class TesteCommandLine {
 
     public static BDVeiculos bancoDeVeiculos = BDVeiculos.getBDVeiculos();
 
@@ -19,11 +19,10 @@ public class Teste {
                     "8. Excluir Veículo de Carga pela Placa%n" +
                     "9. Sair do Sistema%n";
 
-    public static void main(String[] args)
-            throws IOException, InterruptedException {
+    public static void main(String[] args) {
 
-        final List<Passeio> veiculosPasseio = bancoDeVeiculos.getBDPasseio();
-        final List<Carga> veiculosCarga = bancoDeVeiculos.getBDCarga();
+        final List<Passeio> veiculosPasseio = BDVeiculos.getBDPasseio();
+        final List<Carga> veiculosCarga = BDVeiculos.getBDCarga();
 
         String command;
 
