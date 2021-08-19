@@ -12,8 +12,8 @@ public class TestGUI {
     private static JFrame tela = new JFrame("Título inicial");
 
     private static ButtonGroup btGroup = new ButtonGroup();
-    private static JRadioButton passeioButton = new JRadioButton("Passeio", true);
-    private static JRadioButton cargaButton = new JRadioButton("Carga", false);
+    private static JRadioButton passeioButton = new JRadioButton("Carro de Passeio", true);
+    private static JRadioButton cargaButton = new JRadioButton("Carro de Carga", false);
     private static CarType selectedCarType;
 
     enum CarType {
